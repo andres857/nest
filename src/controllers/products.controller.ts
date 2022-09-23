@@ -1,15 +1,44 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { ProductsService } from '../services/products.service';
 
-@Controller('products')
+@Controller('productss')
 export class ProductsController {
-  @Get('/:id')
-  getProducts(@Param('id') id: string) {
-    console.log(typeof id);
-    return `product ${id}`;
+  constructor(private productsService: ProductsService) {}
+
+  @Get()
+  getproducts() {
+    console.log('route');
+    let p = 'kjajaja';
+
+    // const products = this.productsService.findAll();
+    // return {
+    //   products,
+    // };
   }
 
-  @Get('')
-  paginationProducts(@Query('limit') limit = 20, @Query('offset') offset = 20) {
-    return `Route products limit:${limit} offset:${offset}`;
+  @Get('/:id')
+  getOne(@Param('id') id: number) {
+    const product = this.productsService.findOne(id);
+    return {
+      product,
+    };
+  }
+
+  @Post()
+  create(@Body() payload: any) {
+    return {
+      message: 'product created',
+      data: payload,
+    };
+  }
+  @Put(':id')
+  update(@Param('id') id: string, @Body() payload: any) {
+    return {
+      message: 'product updated',
+      data: {
+        idProduct: id,
+        data: payload,
+      },
+    };
   }
 }
