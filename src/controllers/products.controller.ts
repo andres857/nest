@@ -8,7 +8,6 @@ export class ProductsController {
   @Get()
   getproducts() {
     console.log('route');
-    let p = 'kjajaja';
 
     // const products = this.productsService.findAll();
     // return {
