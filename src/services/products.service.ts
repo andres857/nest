@@ -3,10 +3,10 @@ import { Product } from 'entities/product.entity';
 
 @Injectable()
 export class ProductsService {
-  private counterId = 1;
+  private counterId = 0;
   private products: Product[] = [
     {
-      id: 1,
+      id: 0,
       name: 'pro 1',
       description: 'iam description',
       image: 'https://google.com',
@@ -15,8 +15,6 @@ export class ProductsService {
     },
   ];
   findAll() {
-    console.log('aaa');
-
     return this.products;
   }
   findOne(id: number) {
@@ -35,13 +33,15 @@ export class ProductsService {
     const index = this.products.findIndex((item) => item.id === id);
     const product = this.products[index];
     this.products[index] = {
-      product,
+      ...product,
       ...data,
     };
     return this.products[index];
   }
   delete(id: number) {
     const index = this.products.findIndex((item) => item.id === id);
+    const deleteProduct = this.products[index];
     this.products.splice(index, 1);
+    return deleteProduct;
   }
 }
