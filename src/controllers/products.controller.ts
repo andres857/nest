@@ -5,9 +5,11 @@ import {
   Param,
   Post,
   Put,
-  ParseIntPipe,
+  // ParseIntPipe,
   Delete,
 } from '@nestjs/common';
+import { CreateProductDto, UpdateProductDto } from '../dtos/products.dto';
+import { ParseIntPipe } from '../common/parse-int.pipe';
 import { ProductsService } from '../services/products.service';
 
 @Controller('products')
@@ -31,7 +33,7 @@ export class ProductsController {
   }
 
   @Post()
-  create(@Body() payload: any) {
+  create(@Body() payload: CreateProductDto) {
     const newProduct = this.productsService.create(payload);
     return {
       message: 'product created',
@@ -39,7 +41,10 @@ export class ProductsController {
     };
   }
   @Put(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() payload: any) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() payload: UpdateProductDto,
+  ) {
     const updateProduct = this.productsService.update(id, payload);
     return {
       message: 'product Updated',
