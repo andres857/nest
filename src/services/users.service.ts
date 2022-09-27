@@ -9,7 +9,7 @@ export class UsersService {
       id: 0,
       name: 'andres',
       phone: '3007566519',
-      email: 'andres@gmail.com',
+      email: 'andres@wc.com',
     },
   ];
 
