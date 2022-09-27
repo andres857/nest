@@ -5,11 +5,10 @@ import {
   Param,
   Post,
   Put,
-  // ParseIntPipe,
+  ParseIntPipe,
   Delete,
 } from '@nestjs/common';
 import { CreateProductDto, UpdateProductDto } from '../dtos/products.dto';
-import { ParseIntPipe } from '../common/parse-int.pipe';
 import { ProductsService } from '../services/products.service';
 
 @Controller('products')

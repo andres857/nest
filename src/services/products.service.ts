@@ -37,6 +37,7 @@ export class ProductsService {
   }
   update(id: number, data: UpdateProductDto) {
     const index = this.products.findIndex((item) => item.id === id);
+    console.log(`${index} ------`);
     if (index === -1) {
       throw new NotFoundException();
     }
