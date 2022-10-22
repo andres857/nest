@@ -11,26 +11,27 @@ import {
 import { CreateBrandDto, UpdateBrandDto } from '../dtos/brand.dto';
 import { BrandsService } from '../services/brands.service';
 
+// define the route
 @Controller('brands')
 export class BrandsController {
-  constructor(private BrandsService: BrandsService) {}
+  constructor(private brandsService: BrandsService) {}
   @Get()
   getBrands() {
-    const brands = this.BrandsService.findAll();
+    const brands = this.brandsService.findAll();
     return {
       brands,
     };
   }
   @Get(':id')
   getBrand(@Param('id', ParseIntPipe) id: number) {
-    const brand = this.BrandsService.findOne(id);
+    const brand = this.brandsService.findOne(id);
     return {
       brand,
     };
   }
   @Post()
   newBrand(@Body() payload: CreateBrandDto) {
-    const newBrand = this.BrandsService.create(payload);
+    const newBrand = this.brandsService.create(payload);
     return newBrand;
   }
   @Put(':id')
@@ -38,12 +39,12 @@ export class BrandsController {
     @Param('id', ParseIntPipe) id: number,
     @Body() payload: UpdateBrandDto,
   ) {
-    const brandupdated = this.BrandsService.update(id, payload);
+    const brandupdated = this.brandsService.update(id, payload);
     return brandupdated;
   }
   @Delete(':id')
   deleteBrand(@Param('id', ParseIntPipe) id: number) {
-    const deletedBrand = this.BrandsService.delete(id);
+    const deletedBrand = this.brandsService.delete(id);
     return deletedBrand;
   }
 }

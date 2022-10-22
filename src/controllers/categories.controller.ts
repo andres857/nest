@@ -13,17 +13,17 @@ import { CreateCategoryDto, UpdateCategoryDto } from '../dtos/categories.dto';
 
 @Controller('categories')
 export class CategoriesController {
-  constructor(private CategoryService: CategoryService) {}
+  constructor(private categoryService: CategoryService) {}
   @Get()
   getCategories() {
-    const categories = this.CategoryService.findAll();
+    const categories = this.categoryService.findAll();
     return {
       categories,
     };
   }
   @Get(':id')
   getById(@Param('id', ParseIntPipe) id: number) {
-    const categoryFound = this.CategoryService.findOne(id);
+    const categoryFound = this.categoryService.findOne(id);
     return {
       message: 'Category found',
       data: categoryFound,
@@ -31,7 +31,7 @@ export class CategoriesController {
   }
   @Post()
   create(@Body() payload: CreateCategoryDto) {
-    const newCategory = this.CategoryService.create(payload);
+    const newCategory = this.categoryService.create(payload);
     return {
       message: 'category created',
       data: {
@@ -44,7 +44,7 @@ export class CategoriesController {
     @Param('id', ParseIntPipe) id: number,
     @Body() payload: UpdateCategoryDto,
   ) {
-    const upCategory = this.CategoryService.update(id, payload);
+    const upCategory = this.categoryService.update(id, payload);
     return {
       message: 'category found',
       data: upCategory,
@@ -52,7 +52,7 @@ export class CategoriesController {
   }
   @Delete(':id')
   deleteCategory(@Param('id', ParseIntPipe) id: number) {
-    const categoryDelete = this.CategoryService.delete(id);
+    const categoryDelete = this.categoryService.delete(id);
     return {
       message: 'category delete',
       data: categoryDelete,
